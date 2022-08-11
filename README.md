@@ -1,2 +1,1 @@
-# virtual-notepad
-Interactive Note Taker and Saver
+# Note Taker Starter Code
