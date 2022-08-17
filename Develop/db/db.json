@@ -1,13 +1,1 @@
-[
-    {
-        "title":"Test Title",
-        "text":"Test text",
-        "note_id":"Test id"
-    },
-    {
-        "title":"Test Title 2",
-        "text":"Test text 2",
-        "note_id":"Test id 2" 
-    }
-
-]
+[{"title":"Test Title","text":"Test text","note_id":"Test id"},{"title":"Test Title 2","text":"Test text 2","note_id":"Test id 2"},{"title":"Test Title 3","text":"Test text 3","note_id":"17f84ca9-9824-4b5b-ae27-ff04aa21bca5"},{"title":"Test 4","text":"Test 4","note_id":"7fd1ff28-a7ed-4e92-bf9a-da5f37fdd149"}]

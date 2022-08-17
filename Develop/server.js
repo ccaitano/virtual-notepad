@@ -10,8 +10,9 @@ const util = require ('util');
 
 // Require the `db.json` file and store it in `notes`
 const dbFile = require('./db/db.json');
-const uuid = require('./helpers/uuid');
-const fsUtils = require('./helpers/fsUtils')
+// const { readFromFile, readAndAppend } = require('./helpers/fsUtils');
+const { v4: uuidv4 } = require('uuid');
+// const { get } = require('http');
 
 // Use express to initialize the `app` server
 const app = express();
@@ -43,11 +44,46 @@ app.get('/notes', (req, res) =>
 
 // GET /api/notes should read the db.json file
 app.get('/api/notes', (req, res) => {
+    console.info(`${req.method} request received for feedback`);
     res.json(dbFile);
 });	
 
 // POST /api/notes should receive a new note to save on the request body, add it to the db.json file, and then return the new note to the client
-	
+app.post('/api/notes', (req, res) => {
+    console.info(`${req.method} request received to submit notes`);
+    // Destructuring assignment for the items in req.body
+    const { title, text } = req.body;
+  
+    // If all the required properties are present
+    if (title && text) {
+      // Variable for the object we will save
+      const newNote = {
+        title,
+        text,
+        note_id: uuidv4(),
+      };
+
+      dbFile.push(newNote);
+
+      const notesString = JSON.stringify(dbFile);
+      
+      fs.writeFile('./db/db.json', notesString, (err) =>
+        err
+            ? console.error(err)
+            : console.log(`Note Submitted`)
+        );
+  
+      const response = {
+        status: 'success',
+        body: newNote,
+      };
+  
+      res.json(response);
+    } else {
+      res.json('Error in saving new note');
+    }
+  });
+// })
 	// json.strigify data
 	
 	// fs.writeFile
