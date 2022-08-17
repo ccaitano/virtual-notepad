@@ -20,6 +20,8 @@ const app = express();
 // Declare Port
 const PORT = process.env.port || 3001;
 
+let savedNotes = [];
+
 // Have the `app` use the appropriate middleware to parse body data
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
@@ -45,7 +47,9 @@ app.get('/notes', (req, res) =>
 // GET /api/notes should read the db.json file
 app.get('/api/notes', (req, res) => {
     console.info(`${req.method} request received for feedback`);
-    res.json(dbFile);
+    savedNotes = fs.readFileSync("./db/db.json", "utf-8");
+    savedNotes = JSON.parse(savedNotes);
+    res.json(savedNotes);
 });	
 
 // POST /api/notes should receive a new note to save on the request body, add it to the db.json file, and then return the new note to the client
@@ -60,7 +64,7 @@ app.post('/api/notes', (req, res) => {
       const newNote = {
         title,
         text,
-        note_id: uuidv4(),
+        id: uuidv4(),
       };
 
       dbFile.push(newNote);
@@ -83,10 +87,7 @@ app.post('/api/notes', (req, res) => {
       res.json('Error in saving new note');
     }
   });
-// })
-	// json.strigify data
-	
-	// fs.writeFile
+
 
 // Use the `app` to `listen` to a specific port
 app.listen(PORT, () =>
