@@ -7,6 +7,8 @@ const dbFile = require('./db/db.json');
 // Use express to initialize the `app` server
 const app = express();
 
+const PORT = 3001;
+
 // Have the `app` use the appropriate middleware to parse body data
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
@@ -28,4 +30,6 @@ app.use(express.static('public'));
 	// fs.writeFile
 
 // Use the `app` to `listen` to a specific port
-
+app.listen(PORT, () =>
+    console.log(`App listening at http://localhost:${PORT}`)
+);
