@@ -2,7 +2,7 @@ const express = require('express');
 const notesDb = require('../db/db.json');
 const notesRouter = express.Router();
 
-const { readFromFile, readAndAppend } = require('./helpers/fsUtils');
+const { readFromFile, readAndAppend } = require('../helpers/fsUtils');
 // GET Route for retrieving the notes
 
 notesRouter.get('/', (req, res) => {

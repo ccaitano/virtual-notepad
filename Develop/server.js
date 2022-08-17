@@ -10,7 +10,8 @@ const routes = require('./routes');
 
 // Require the `db.json` file and store it in `notes`
 const dbFile = require('./db/db.json');
-const uuid = require('./helpers/uuid.js');
+const uuid = require('./helpers/uuid');
+const fsUtils = require('./helpers/fsUtils')
 
 // Use express to initialize the `app` server
 const app = express();
