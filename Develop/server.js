@@ -88,7 +88,36 @@ app.post('/api/notes', (req, res) => {
     }
   });
 
-
+app.delete('/api/notes/:id', (req, res) => {
+    console.info(`${req.method} request received to delete note`);
+    savedNotes = fs.readFileSync("./db/db.json", "utf-8");
+    savedNotes = JSON.parse(savedNotes);
+    // for(let i = 0; i < savedNotes.length; i++) {
+    //     if (savedNotes[i].id == req.params.id) {
+    //         console.log('Note Removed');
+    //         savedNotes.splice(i);
+    //         console.log(savedNotes);
+    //     } 
+    //     return savedNotes;
+    // }
+    savedNotes = savedNotes.filter( function deleteSelectedNote(note) {
+        for(let i = 0; i < savedNotes.length; i++) {
+                if (note.id == req.params.id) {
+                    console.log('Note Removed');
+                    savedNotes.splice(i, 1);
+                } 
+            }
+        return savedNotes;
+    });
+    console.log(savedNotes);
+    savedNotes = JSON.stringify(savedNotes);
+    fs.writeFile("./db/db.json", savedNotes, "utf-8", (err) =>
+    err
+        ? console.error(err)
+        : console.log(`Note Deleted`)
+    );
+    res.send(JSON.parse(savedNotes));
+});
 // Use the `app` to `listen` to a specific port
 app.listen(PORT, () =>
     console.log(`App listening at http://localhost:${PORT}`)
