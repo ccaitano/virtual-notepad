@@ -1,8 +1,12 @@
-// Require express
+// Require express, fs, path, and util packages
 const express = require('express');
+const path = require('path');
+const fs = require('fs');
+const util = require ('util');
 
 // Require the `db.json` file and store it in `notes`
 const dbFile = require('./db/db.json');
+const uuid = require('./helpers/uuid.js');
 
 // Use express to initialize the `app` server
 const app = express();
