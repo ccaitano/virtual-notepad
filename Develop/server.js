@@ -3,16 +3,10 @@ const express = require('express');
 const path = require('path');
 const fs = require('fs');
 const util = require ('util');
-// const api = require ('./routes/index.js');
-
-// Require modular routes for notes
-// const routes = require('./routes');
 
 // Require the `db.json` file and store it in `notes`
 const dbFile = require('./db/db.json');
-// const { readFromFile, readAndAppend } = require('./helpers/fsUtils');
 const { v4: uuidv4 } = require('uuid');
-// const { get } = require('http');
 
 // Use express to initialize the `app` server
 const app = express();
@@ -25,7 +19,6 @@ let savedNotes = [];
 // Have the `app` use the appropriate middleware to parse body data
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
-// app.use('/api', api);
 
 app.use(express.static('public'));
 
@@ -34,15 +27,10 @@ app.get('/', (req, res) =>
     res.sendFile(path.join(__dirname, '/public/index.html'))
 );
 
-// GET /notes shoudl return the notes.html file.
+// GET /notes should return the notes.html file.
 app.get('/notes', (req, res) =>
     res.sendFile(path.join(__dirname, '/public/notes.html'))
 );
-
-// GET * should return the index.html file.
-// app.get('*', (req, res) =>
-//     res.sendFile(path.join(__dirname, '/public/index.html'))
-// );
 
 // GET /api/notes should read the db.json file
 app.get('/api/notes', (req, res) => {
@@ -57,7 +45,6 @@ app.post('/api/notes', (req, res) => {
     console.info(`${req.method} request received to submit notes`);
     savedNotes = fs.readFileSync("./db/db.json", "utf-8");
     savedNotes = JSON.parse(savedNotes);
-
     // Destructuring assignment for the items in req.body
     const { title, text } = req.body;
   
@@ -110,6 +97,12 @@ app.delete('/api/notes/:id', (req, res) => {
     );
     res.json(savedNotes);
 });
+
+// GET * should return the index.html file.
+app.get('/*', (req, res) =>
+    res.status(404).sendFile(path.join(__dirname, '/public/index.html'))
+);
+
 // Use the `app` to `listen` to a specific port
 app.listen(PORT, () =>
     console.log(`App listening at http://localhost:${PORT}`)
