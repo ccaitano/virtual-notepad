@@ -3,23 +3,20 @@ const express = require('express');
 const path = require('path');
 const fs = require('fs');
 const util = require ('util');
-
-// Require the `db.json` file and store it in `notes`
-const dbFile = require('./db/db.json');
 const { v4: uuidv4 } = require('uuid');
 
 // Use express to initialize the `app` server
 const app = express();
 
-// Declare Port
-const PORT = process.env.port || 3001;
+// Declare port
+const PORT = process.env.PORT || 3001;
 
+// Declare global variables
 let savedNotes = [];
 
 // Have the `app` use the appropriate middleware to parse body data
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
-
 app.use(express.static('public'));
 
 // GET Route for the homepage
@@ -58,9 +55,7 @@ app.post('/api/notes', (req, res) => {
       };
 
       savedNotes.push(newNote);
-
-      savedNotes = JSON.stringify(savedNotes);
-      
+      savedNotes = JSON.stringify(savedNotes);      
       fs.writeFile('./db/db.json', savedNotes, (err) =>
         err
             ? console.error(err)
@@ -78,6 +73,7 @@ app.post('/api/notes', (req, res) => {
     }
   });
 
+// DELETE selected notes
 app.delete('/api/notes/:id', (req, res) => {
     console.info(`${req.method} request received to delete note`);
     savedNotes = fs.readFileSync("./db/db.json", "utf-8");
@@ -98,7 +94,7 @@ app.delete('/api/notes/:id', (req, res) => {
     res.json(savedNotes);
 });
 
-// GET * should return the index.html file.
+// GET * should return the index.html file for any wildcard paths
 app.get('/*', (req, res) =>
     res.status(404).sendFile(path.join(__dirname, '/public/index.html'))
 );
