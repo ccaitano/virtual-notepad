@@ -1,5 +1,5 @@
 # virtual-notepad 📄 - [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-Virtual notepad
+[Virtual Note Taker](https://virtual-notepad.herokuapp.com/)
 
 ## **Description**
 The `Virutal Note Taker` allows the user to save notes in one location and refer back to them at a later time. If needed, notes may be deleted and removed from the existing list.
@@ -20,29 +20,26 @@ To install this application, make a `clone` of this repository to your local mac
 
 Once the repository is cloned to your local machine, then:
 
+Option 1 - Launch from the Terminal:
 - Install the required packages by running `npm i` in your applicable terminal
 - Run `node server.js` in your applicable terminal
-- Follow the prompts in the terminal to enter the team manager information first, followed by entering information for all other members (engineers and interns).
-- `HTML Page Successfully Created!` will appear in your terminal once all team members have been entered and your file has been created
-- Open `index.html` to see the generated HTML file
+- `App listening at http://localhost:3001` will appear in your terminal 
+- Open `link` to see the generated HTML file
 
-Team Profile Generator Tests:
+Option2 - Launch from a Web Browser:
+- Visit the Note Taker Website at [https://virtual-notepad.herokuapp.com/](https://virtual-notepad.herokuapp.com/)
 
-![GIF of Team Profile Generartor Successful Tests](./assets/successful-test.gif)
+Note Taker Home Page:
 
-Team Profile Generator User Prompts Walkthrough:
+![Screenshot of Note Taker Home Page](./public/assets/images/note-taker-home.JPG)
 
-![GIF of Team Profile Generator Walkthrough](./assets/user-prompts.gif)
+Note Taker Saved Notes Page:
 
-Team Profile Generator HTML Product with Working Links and Responsive Layout:
+![Screenshot of Saved Notes Page](./public/assets/images/saved-notes.JPG)
 
-![GIF of Team Profile Generator HTML Product](./assets/html-page.gif)
+Brief Walkthrough of Saving and Deleting Notes:
 
-Sample HTML File:
-
-[Sample Generated HTML File](./assets/sample-index.html)
-
-![Screenshot of Sample HTML Page](./assets/html-screenshot.JPG)
+![GIF of Note Taker Web App](./public/assets/images/walkthrough-gif.gif)
 
 ## **License**
 
